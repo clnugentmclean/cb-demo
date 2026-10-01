@@ -24,10 +24,17 @@ function makeCard(obj) {
     } else if (obj.format.includes("record")) {
         thumbSrc = '{{ "/assets/lib/icons/" | relative_url }}{{ icons.icon-record }}.svg';
     } else if (obj.format.includes("compound")) {
-        if (obj.img) {
-          imgSrc = obj.img;
+        if (obj.image_thumb) {
+          var t = obj.image_thumb.trim();
+          if (t.includes("http")) {
+            imgSrc = t;
+          } else if (t.includes("/")) {
+            imgSrc = "{{ '/' | relative_url }}" + t.replace(/^\//, "");
+          } else {
+            imgSrc = "{{ '/objects/' | relative_url }}" + t;
+          }
         } else {
-          thumbSrc= '{{"/assets/lib/icons/" | relative_url}}{{ icons.icon-compound-object }}.svg'
+          thumbSrc = '{{ "/assets/lib/icons/" | relative_url }}{{ icons.icon-compound-object }}.svg';
         }
     } else if (obj.format.includes("multiple")) {
         thumbSrc = '{{ "/assets/lib/icons/" | relative_url }}{{ icons.icon-multiple }}.svg';
