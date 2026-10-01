@@ -24,7 +24,11 @@ function makeCard(obj) {
     } else if (obj.format.includes("record")) {
         thumbSrc = '{{ "/assets/lib/icons/" | relative_url }}{{ icons.icon-record }}.svg';
     } else if (obj.format.includes("compound")) {
-        thumbSrc = '{{ "/assets/lib/icons/" | relative_url }}{{ icons.icon-compound-object }}.svg';
+        if (obj.img) {
+          imgSrc = obj.img;
+        } else {
+          thumbSrc= '{{"/assets/lib/icons/" | relative_url}}{{ icons.icon-compound-object }}.svg'
+        }
     } else if (obj.format.includes("multiple")) {
         thumbSrc = '{{ "/assets/lib/icons/" | relative_url }}{{ icons.icon-multiple }}.svg';
     } else {
